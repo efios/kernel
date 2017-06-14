@@ -1,4 +1,4 @@
-/* ld -m elf_i386 -T link.ld -o kernel kasm.o kc.o */
+/* ld -m elf_i386 -T link.ld -o kernel kasm.o kernelc.o */
 
 OUTPUT_FORMAT(elf32-i386)
 ENTRY(start)
