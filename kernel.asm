@@ -14,11 +14,11 @@ global start
 extern kernel_main
 
 start:
-    cli 
-    mov esp, stack_space
+    cli				; block interrupts
+    mov esp, stack_space	; stack pointer
     call kernel_main
-    hlt
+    hlt				; halt cpu
 
 section .bss
-resb 8192
+resb 8192			; 8kb stack
 stack_space:
