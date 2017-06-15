@@ -13,9 +13,12 @@ section .text
 global start
 global read_port
 global write_port
+global load_idt
+global keyboard_handler
 
 	
 extern kernel_main
+extern keyboard_handler_main
 
 read_port:
 	mov edx, [esp + 4]
@@ -28,6 +31,15 @@ write_port:
 	out dx, al
 	ret
 
+load_idt:
+	mov edx, [esp + 4]
+	lidt [edx]
+	sti
+	ret
+
+keyboard_handler:
+	call keyboard_handler_main
+	iretd
 start:
     cli				; block interrupts
     mov esp, stack_space	; stack pointer
