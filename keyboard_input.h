@@ -1,3 +1,6 @@
+#ifndef KEYBOARD_INPUT_H
+#define KEYBOARD_INPUT_H
+
 #define IDT_SIZE 256
 #define KERNEL_SEGMENT_OFFSET 0x08
 #define INTERRUPT_GATE 0x8e
@@ -39,3 +42,5 @@ void init_idt(void);
 void keyboard_init(void);
 
 void keyboard_handler_main(void);
+
+#endif

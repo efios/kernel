@@ -3,6 +3,9 @@
 
 #include "keyboard_input.h"
 
+extern void idt_init(void);
+extern void keyboard_init(void);
+
 #define VIDEO_START 0xb8000		       
 #define MAX_LINES 25
 #define CHARACTERS_PER_LINE 80
@@ -21,7 +24,7 @@ void kernel_clear_screen()
   while(i < SCREENSIZE)
     {
       vidptr[i++] = ' ';
-      vidptr[i++] = 0x07;
+      vidptr[i++] = LIGHT_GRAY;
     }
 }
 
@@ -49,5 +52,8 @@ void kernel_main(void)
     kernel_print_newline();
     kernel_print_newline();
     
+    idt_init();
+    keyboard_init();
+
     while(1);
 }

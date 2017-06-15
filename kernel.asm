@@ -40,6 +40,7 @@ load_idt:
 keyboard_handler:
 	call keyboard_handler_main
 	iretd
+	
 start:
     cli				; block interrupts
     mov esp, stack_space	; stack pointer
