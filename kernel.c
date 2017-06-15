@@ -30,6 +30,7 @@ void kernel_main()
 
         vidptr[i + 1] = LIGHT_GRAY;
         i = i + 2;
+	++k;
     }
     return;
 }
