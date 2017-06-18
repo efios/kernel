@@ -3,8 +3,12 @@ CFLAGS=-m32 -fno-stack-protector
 
 ASM=nasm -f elf32 
 
-SDIR= source/
-BDIR= bin/
+SDIR= ../source/
+# "Input directory"
+IDIR= $(SDIR)kinput/
+
+BDIR= ../bin/
+# "Temp directory"
 TDIR= $(BDIR)temp/
 
 ASMSRC=$(SDIR)kernel.asm
@@ -22,7 +26,7 @@ kernelc:
 	$(CC) $(CFLAGS) -c $(SDIR)kernel.c -o $(TDIR)kernelc.o
 
 keyboardinput:
-	$(CC) $(CFLAGS) -c $(SDIR)keyboard_input.c -o $(TDIR)keyboard_input.o
+	$(CC) $(CFLAGS) -c $(IDIR)keyboard_input.c -o $(TDIR)keyboard_input.o
 
 kasm:
 	$(ASM) $(ASMSRC) -o $(TDIR)kasm.o
@@ -36,4 +40,4 @@ clean:
 	$(RM) $(TDIR)*.o
 
 clean-all: 
-	$(RM) $(TDIR)$(OBJ) $(BDIR)$(KERNEL)
+	$(RM) $(TDIR)*.o $(BDIR)$(KERNEL)

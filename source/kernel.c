@@ -1,7 +1,7 @@
 /* kernel .c */
 /* gcc -fno-stack-protector -m32 -c kernel.c keyboard_input.c -o kernelc.o */
 
-#include "keyboard_input.h"
+#include "kinput/keyboard_input.h"
 
 extern void idt_init(void);
 extern void keyboard_init(void);
