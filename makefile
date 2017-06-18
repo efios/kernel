@@ -2,16 +2,16 @@ CC=gcc
 CFLAGS=-m32 -fno-stack-protector
 
 ASM=nasm -f elf32 
-
+ASMSRC=kernel.asm
 # DEPS=keyboard_input.h
 
-SRC=kernel.c keyboard_input.c
+SRC=kernel.c keyboard_input.c 
 OBJ=kernelc.o keyboard_input.o kasm.o
 
-EXE=kernel
-LINKSCRIPT=link.ld
-ELF=elf_i386
-LDFLAGS=-m $(ELF) -T $(LINKSCRIPT)
+KERNEL=kernel
+LDSCRIPT=-T link.ld
+ELF=-m elf_i386
+LDFLAGS=$(ELF) $(LDSCRIPT)
 
 default: all
 
@@ -25,9 +25,12 @@ kasm:
 	$(ASM) kernel.asm -o kasm.o
 
 link:
-	ld $(LDFLAGS) -o $(EXE) $(OBJ)
+	ld $(LDFLAGS) -o $(KERNEL) $(OBJ)
 
 all: kernelc keyboardinput kasm link
 
-clean: 
-	$(RM) $(OBJ) $(EXE)
+clean:
+	$(RM) $(OBJ)
+
+clean-all: 
+	$(RM) $(OBJ) $(KERNEL)
