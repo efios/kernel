@@ -1,5 +1,5 @@
 /* kernel .c */
-/* gcc -m32 -c kernel.c keyboard_input.c -o kernelc.o */
+/* gcc -fno-stack-protector -m32 -c kernel.c keyboard_input.c -o kernelc.o */
 
 #include "keyboard_input.h"
 
