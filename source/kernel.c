@@ -46,10 +46,8 @@ void kernel_print(const char *string)
 
 void kernel_main(void)
 {
-    const char *string = "My first kernel!";    
-    kernel_clear_screen();
+    const char *string = "My first kernel!";
     kernel_print(string);
-    kernel_print_newline();
     kernel_print_newline();
     
     idt_init();

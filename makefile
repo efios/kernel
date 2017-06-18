@@ -39,7 +39,7 @@ kasm:
 link:
 	ld $(LDFLAGS) -o $(BDIR)$(KERNEL) $(TDIR)*.o
 
-all: kernelc keyboardinput kasm link
+all: directories kernelc keyboardinput kasm link
 
 clean:
 	$(RM) $(TDIR)*.o
