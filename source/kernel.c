@@ -36,17 +36,23 @@ void kernel_print_newline()
 
 void kernel_print(const char *string)
 {
-  unsigned int i = 0;
+  unsigned int i;
+  for(i = 0; string[i] != '\0';)
+    vidptr[current_location++] = string[i++];
+
+  /*
   while(string[i] != '\0')
     {
       vidptr[current_location++] = string[i++];
       vidptr[current_location++] = string[i++];
     }
+  */
 }
 
 void kernel_main(void)
 {
     const char *string = "My first kernel!";
+    kernel_clear_screen();
     kernel_print(string);
     kernel_print_newline();
     
