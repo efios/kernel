@@ -28,7 +28,7 @@ void kernel_clear_screen()
     }
 }
 
-void kernel_print_newline()
+void kernel_newline()
 {
   current_location = current_location +
     (LINE_SIZE - current_location % (LINE_SIZE));

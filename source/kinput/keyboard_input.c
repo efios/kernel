@@ -58,13 +58,14 @@ void keyboard_handler_main(void)
 
   status = read_port(KEYBOARD_STATUS_PORT);
   if(status & 0x01)
-    {
-      keycode = read_port(KEYBOARD_DATA_PORT);
-      if(keycode < 0)
-	return;
-      vidptr[current_location++] = keyboard_map[(unsigned char)keycode];
-      vidptr[current_location++] = 0x07;
+  {
+    keycode = read_port(KEYBOARD_DATA_PORT);
+    if(keycode < 0)
+	    return;
 
-    }
+     
+    vidptr[current_location++] = keyboard_map[(unsigned char)keycode];
+    vidptr[current_location++] = 0x07;
+  }
 }
 
