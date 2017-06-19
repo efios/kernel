@@ -3,7 +3,7 @@ CFLAGS=-m32 -fno-stack-protector
 
 ASM=nasm -f elf32 
 
-RMDIR_R=rmdir -r
+RMDIR_R=rmdir
 MKDIR_P=mkdir -p
 
 SDIR=source/
@@ -48,12 +48,16 @@ all: bin temp  kernelc keyboardinput kasm link
 clean:
 	$(RM) $(TDIR)*.o
 
-clean-bin:
+RM-bin:
 	$(RMDIR_R) $(BDIR)
 
-clean-temp:
+RM-temp:
 	$(RMDIR_R) $(TDIR)
 	
+clean-temp:
+	$(RM) $(TDIR)*.o
 
-clean-all: clean-temp clean-bin 
-	$(RM) $(TDIR)*.o $(BDIR)$(KERNEL)
+clean-bin:
+	$(RM) $(BDIR)$(KERNEL)
+
+clean-all: clean-temp clean-bin RM-temp RM-bin 
