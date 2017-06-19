@@ -3,13 +3,13 @@ CFLAGS=-m32 -fno-stack-protector
 
 ASM=nasm -f elf32 
 
-MKDIR_P = mkdir -p
+MKDIR_P=mkdir -p
 
-SDIR= source/
+SDIR=source/
 # "Input directory"
-IDIR= $(SDIR)kinput/
+IDIR=$(SDIR)kinput/
 
-BDIR= bin/
+BDIR=bin/
 # "Temp directory"
 TDIR= $(BDIR)temp/
 
@@ -24,8 +24,11 @@ LDFLAGS=$(ELF) $(LDSCRIPT)
 
 default: all
 
-directories:
-	$(MKDIR_P) $(BDIR) $(MKDIR_P) $(TDIR)
+bin:
+	$(MKDIR_P) $(BDIR)
+
+temp:
+	$(MKDIR_P) $(TDIR)
 
 kernelc:
 	$(CC) $(CFLAGS) -c $(SDIR)kernel.c -o $(TDIR)kernelc.o
@@ -39,7 +42,7 @@ kasm:
 link:
 	ld $(LDFLAGS) -o $(BDIR)$(KERNEL) $(TDIR)*.o
 
-all: directories kernelc keyboardinput kasm link
+all: bin temp  kernelc keyboardinput kasm link
 
 clean:
 	$(RM) $(TDIR)*.o
