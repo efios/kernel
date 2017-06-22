@@ -37,6 +37,7 @@ void kernel_print_newline()
 void kernel_print(const char *string)
 {
   unsigned int i;
+
   for(i = 0; string[i] != '\0';)
     vidptr[current_location++] = string[i++];
 
