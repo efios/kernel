@@ -10,6 +10,7 @@ SDIR=source/
 # "Input directory"
 IDIR=$(SDIR)kinput/
 
+# "Binary directory"
 BDIR=bin/
 # "Temp directory"
 TDIR=$(BDIR)temp/
