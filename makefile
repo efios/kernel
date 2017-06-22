@@ -3,15 +3,16 @@ CFLAGS=-m32 -fno-stack-protector
 
 ASM=nasm -f elf32 
 
-MKDIR_P = mkdir -p
+RMDIR_R=rmdir
+MKDIR_P=mkdir -p
 
-SDIR= source/
+SDIR=source/
 # "Input directory"
-IDIR= $(SDIR)kinput/
+IDIR=$(SDIR)kinput/
 
-BDIR= bin/
+BDIR=bin/
 # "Temp directory"
-TDIR= $(BDIR)temp/
+TDIR=$(BDIR)temp/
 
 ASMSRC=$(SDIR)kernel.asm
 SRC=$(SDIR)kernel.c $(SDIR)keyboard_input.c 
@@ -24,8 +25,11 @@ LDFLAGS=$(ELF) $(LDSCRIPT)
 
 default: all
 
-directories:
-	$(MKDIR_P) $(BDIR) $(MKDIR_P) $(TDIR)
+bin:
+	$(MKDIR_P) $(BDIR)
+
+temp:
+	$(MKDIR_P) $(TDIR)
 
 kernelc:
 	$(CC) $(CFLAGS) -c $(SDIR)kernel.c -o $(TDIR)kernelc.o
@@ -39,10 +43,21 @@ kasm:
 link:
 	ld $(LDFLAGS) -o $(BDIR)$(KERNEL) $(TDIR)*.o
 
-all: directories kernelc keyboardinput kasm link
+all: bin temp  kernelc keyboardinput kasm link
 
 clean:
 	$(RM) $(TDIR)*.o
 
-clean-all: 
-	$(RM) $(TDIR)*.o $(BDIR)$(KERNEL)
+RM-bin:
+	$(RMDIR_R) $(BDIR)
+
+RM-temp:
+	$(RMDIR_R) $(TDIR)
+	
+clean-temp:
+	$(RM) $(TDIR)*.o
+
+clean-bin:
+	$(RM) $(BDIR)$(KERNEL)
+
+clean-all: clean-temp clean-bin RM-temp RM-bin 
