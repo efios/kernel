@@ -21,6 +21,7 @@ unsigned int current_location = 0;
 void kernel_clear_screen()
 {
   unsigned int i = 0;
+
   while(i < SCREENSIZE)
     {
       vidptr[i++] = ' ';
